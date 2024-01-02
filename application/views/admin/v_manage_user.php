@@ -36,6 +36,7 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Username</th>
+                                <th>Level</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
@@ -48,7 +49,7 @@
                     foreach ($user as $list_user) {
                         $no++; ?>
                         <!-- modal untuk menampilakn form edit -->
-                        <div class="modal fade" id="modal-lg<?php echo $list_user->id_user; ?>">
+                        <div class="modal fade" id="modal-lg<?php echo $list_user->id; ?>">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -65,12 +66,12 @@
                                                 <select class="custom-select select2bs4" style="width: 100%;" id="level" name="level">
                                                     <option selected disabled value>-- Pilih --</option>
                                                     <?php foreach ($levelUser as $list_level) {
-                                                        if ($list_user->level_user == $list_level->level_user) { ?>
+                                                        if ($list_user->level == $list_level->level) { ?>
                                                             <option value="<?php echo $list_level->id_level_user ?>" <?php echo "selected"; ?>>
-                                                                <?php echo $list_user->level_user ?>
+                                                                <?php echo $list_user->level ?>
                                                             </option>
                                                         <?php } else { ?>
-                                                            <option value="<?php echo $list_level->id_level_user ?>"><?php echo $list_level->level_user ?></option>
+                                                            <option value="<?php echo $list_level->id_level_user ?>"><?php echo $list_level->level ?></option>
                                                     <?php }
                                                     } ?>
                                                 </select>
@@ -79,16 +80,16 @@
                                                 <label>Status</label>
                                                 <select class="form-control select2bs4" style="width: 100%;" id="status" name="status" required>
                                                     <option selected disabled value>Status</option>
-                                                    <?php if ($list_user->status_user == 1) { ?>
-                                                        <option value="<?php echo $list_user->status_user ?>" <?php echo "selected"; ?>>
+                                                    <?php if ($list_user->status == 1) { ?>
+                                                        <option value="<?php echo $list_user->status ?>" <?php echo "selected"; ?>>
                                                             <?php echo 'Aktif'; ?>
                                                         </option>
                                                         <option value="0">Tidak Aktif</option>
                                                     <?php } ?>
 
-                                                    <?php if ($list_user->status_user == 0) { ?>
+                                                    <?php if ($list_user->status == 0) { ?>
                                                         <option value="1">Aktif</option>
-                                                        <option value="<?php echo $list_user->status_user ?>" <?php echo "selected"; ?>>
+                                                        <option value="<?php echo $list_user->status ?>" <?php echo "selected"; ?>>
                                                             <?php echo 'Tidak Aktif'; ?>
                                                         </option>
                                                     <?php } ?>
@@ -233,14 +234,14 @@
                     "data": "username"
                 },
                 {
-                    "data": "level_user"
+                    "data": "level"
                 },
                 {
                     data: null,
                     name: null,
                     render: function(data, type, row, meta) {
-                        switch (row.status_user) {
-                            case 1:
+                        switch (row.status) {
+                            case "1":
                                 return `<span class="badge badge-success">Aktif</span>`;
                                 break;
                             default:
@@ -254,7 +255,7 @@
                     name: null,
                     sortable: false,
                     render: function(data, type, row, meta) {
-                        return `<a class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-lg${row.id_user}">
+                        return `<a class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-lg${row.id}">
                           <i class="fas fa-pencil-alt"></i> Edit
                         </a>`;
                     }
@@ -277,6 +278,7 @@
             $.ajax({
                 url: $(this).attr('action'),
                 type: "POST",
+                dataType: "JSON",
                 data: $(this).serialize(),
                 beforeSend: function() {
                     $('.simpan').attr('disable', 'disabled');
@@ -287,32 +289,31 @@
                     $('.simpan').html('Submit');
                 },
                 success: function(respon) {
-                    var obj = $.parseJSON(respon);
-                    if (obj.sukses == false) {
-                        if (obj.error_pilih) {
+                    if (respon.sukses == false) {
+                        if (respon.error_pilih) {
                             $('.error_pilih').show();
-                            $('.error_pilih').html(obj.error_pilih);
+                            $('.error_pilih').html(respon.error_pilih);
                             $('.error_pilih').css("color", "red");
                         } else {
                             $('.error_pilih').hide();
                         }
-                        if (obj.error_username) {
+                        if (respon.error_username) {
                             $('.error_username').show();
-                            $('.error_username').html(obj.error_username);
+                            $('.error_username').html(respon.error_username);
                             $('.error_username').css("color", "red");
                         } else {
                             $('.error_username').hide();
                         }
-                        if (obj.error_password) {
+                        if (respon.error_password) {
                             $('.error_password').show();
-                            $('.error_password').html(obj.error_password);
+                            $('.error_password').html(respon.error_password);
                             $('.error_password').css("color", "red");
                         } else {
                             $('.error_password').hide();
                         }
-                        if (obj.error_level) {
+                        if (respon.error_level) {
                             $('.error_level').show();
-                            $('.error_level').html(obj.error_level);
+                            $('.error_level').html(respon.error_level);
                             $('.error_level').css("color", "red");
                         } else {
                             $('.error_level').hide();
@@ -321,8 +322,8 @@
                     } else {
                         $('.clear').hide();
                         Swal.fire({
-                            title: 'Sukses',
-                            text: obj.sukses,
+                            title: 'Success',
+                            text: respon.sukses,
                             icon: 'success',
                         }).then((confirmed) => {
                             window.location.reload();
