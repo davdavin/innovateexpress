@@ -34,7 +34,7 @@ class Login extends CI_Controller
           'status_log' => "login",
         );
         $this->session->set_userdata($session);
-        redirect('Profil');
+        redirect('manageuser');
       } else {
         $this->session->set_flashdata('gagal', "Account isn't activated");
         redirect('login/4dm1n');
@@ -204,6 +204,6 @@ class Login extends CI_Controller
   public function logout()
   {
     $this->session->sess_destroy();
-    redirect('login/jemaat');
+    redirect('');
   }
 }

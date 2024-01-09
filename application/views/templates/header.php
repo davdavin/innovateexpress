@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Innovate Management | <?php echo $title; ?></title>
 
+
   <!-- Favicons -->
   <link href="<?php echo base_url(); ?>resources/front/new-assets/logo.png" rel="icon">
   <!-- Google Font: Source Sans Pro -->
@@ -16,14 +17,27 @@
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Tempusdominus Bootstrap 4 -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>resources/back/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>resources/back/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>resources/back/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>resources/back/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>resources/back/plugins/jqvmap/jqvmap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>resources/back/dist/css/adminlte.min.css">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>resources/back/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>resources/back/plugins/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>resources/back/plugins/summernote/summernote-bs4.min.css">
   <!-- SweetAlert2 -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>resources/back/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>resources/back/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>resources/back/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>resources/back/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
   <style>
     [class*="sidebar-light-"] .nav-sidebar>.nav-item>.nav-link.active {
