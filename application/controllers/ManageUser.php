@@ -9,9 +9,9 @@ class ManageUser extends CI_Controller
     {
         parent::__construct();
 
-        // if ($this->session->userdata('status_log') != "login") {
-        //     redirect('login');
-        // }
+        if ($this->session->userdata('status_log') != "login") {
+            redirect('login');
+        }
 
         $this->load->model(array('M_User'));
         $this->load->helper('url', 'form');
@@ -36,15 +36,15 @@ class ManageUser extends CI_Controller
 
     public function tambah_user()
     {
-        $pilih = $this->input->post('pilih');
         $username = $this->input->post('username');
         $password = $this->input->post('password');
         $email = $this->input->post('email');
         $level = $this->input->post('level');
 
-        $this->form_validation->set_rules('pilih', 'Pilih', 'htmlspecialchars|trim|required');
-        $this->form_validation->set_rules('username', 'Username', 'htmlspecialchars|trim|required|min_length[5]|max_length[15]|is_unique[user.username]');
-        $this->form_validation->set_rules('password', 'Password', 'htmlspecialchars|trim|required|min_length[5]|max_length[15]');
+        $this->form_validation->set_rules('username', 'Username', 'trim|htmlspecialchars|required|min_length[5]|max_length[15]|is_unique[user.username]');
+        $this->form_validation->set_rules('password', 'Password', 'trim|htmlspecialchars|required|min_length[5]|max_length[15]');
+
+        //$this->form_validation->set_rules('password', 'Password', 'htmlspecialchars|trim|required|min_length[5]|max_length[15]');
 
         $this->form_validation->set_rules('level', 'Level', 'required');
 
@@ -67,7 +67,7 @@ class ManageUser extends CI_Controller
             $tanggal = date('Y-m-d H:i:s');
             $data = array(
                 'id_level_user' => $level, 'username' => $username,
-                'password' => password_hash($password, PASSWORD_DEFAULT), 'status_user' => 'AKTIF', 'created_at' => $tanggal
+                'password' => password_hash($password, PASSWORD_DEFAULT), 'status' => 1, 'created_at' => $tanggal
             );
 
             $this->M_User->insert_record($data, 'user');
