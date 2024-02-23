@@ -9,42 +9,67 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="<?php echo base_url() . 'admin/dashboard' ?>" class="nav-link active">
-                        <i class="nav-icon fas fa-info-circle"></i>
+                    <a <?= $this->uri->segment(1) == "admin" || $this->uri->segment(1) == "" ? "class='nav-link active'" : "class='nav-link'" ?> href="<?php echo base_url() . 'admin/dashboard' ?>">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p> Dashboard </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?php echo base_url() . 'manageuser' ?>" class="nav-link">
-                        <i class="nav-icon fas fa-pencil-alt"></i>
+                    <a <?php if ($this->uri->segment(1) == "manageuser") {
+                            echo "class='nav-link active'";
+                        } else {
+                            echo "class='nav-link'";
+                        } ?> href="<?php echo base_url() . 'manageuser' ?>">
+                        <!-- class nav link itu bisa dihapus(?)-->
+                        <i class="nav-icon fas fa-user"></i>
                         <p> User </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="<?php echo base_url() . 'admin' ?>" class="nav-link">
-                        <i class="nav-icon fas fa-door-open"></i>
+                <li <?php if ($this->uri->segment(1) == "managekonten") {
+                        echo "class='nav-item menu-open'";
+                    } else {
+                        echo "class='nav-item'";
+                    } ?>>
+                    <a <?php if ($this->uri->segment(1) == "managekonten") {
+                            echo "class='nav-link active'";
+                        } else {
+                            echo "class='nav-link'";
+                        } ?>>
+                        <i class="nav-icon fas fa-list-alt"></i>
                         <p>
                             Content
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
+
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Ruangan/list_ruangan' ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                            <a <?php if ($this->uri->segment(2) == "managehomepage") {
+                                    echo "class='nav-link active'";
+                                } else {
+                                    echo "class='nav-link'";
+                                } ?> href="<?php echo base_url() . '' ?>">
+                                <i class="fas fa-home nav-icon"></i>
                                 <p>Homepage</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'Ruangan/list_peminjaman' ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                            <a <?php if (($this->uri->segment(1) == "managekonten"  && $this->uri->segment(2) == "managea") || $this->uri->segment(2) == "addarticle" || $this->uri->segment(2) == "editarticle") {
+                                    echo "class='nav-link active'";
+                                } else {
+                                    echo "class='nav-link'";
+                                } ?> href="<?php echo base_url() . 'managekonten/managea' ?>">
+                                <i class="fas fa-align-justify nav-icon"></i>
                                 <p>Article</p>
                             </a>
                         </li>
                     </ul>
+
                 </li>
+
+
                 <li class="nav-item">
-                    <a href="<?php echo base_url() . 'login/jemaat/logout' ?>" class="nav-link">
+                    <a href="<?php echo base_url() . 'login/4dm1n/logout' ?>" class="nav-link">
                         <i class="nav-icon fas fa-sign-out-alt"></i>
                         <p> Logout </p>
                     </a>
