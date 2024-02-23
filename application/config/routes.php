@@ -61,3 +61,13 @@ $route['login/4dm1n/logout'] = 'login/logout';
 // route for manage user admin
 $route['manageuser'] = 'ManageUser';
 $route['manageuser/add'] = 'ManageUser/tambah_user';
+
+// route for manage konten
+$route['managekonten/managea'] = 'ManageKonten/manage_artikel';
+$route['managekonten/showa'] = 'ManageKonten/show_article';
+$route['managekonten/addarticle'] = 'ManageKonten/add_new_article';
+$route['article_add_process'] = 'ManageKonten/proses_tambah_artikel';
+$route['managekonten/editarticle/(:num)'] = 'ManageKonten/edit_artikel/$1';
+$route['article_edit_process'] = 'ManageKonten/proses_edit_artikel';
+
+// read the article
